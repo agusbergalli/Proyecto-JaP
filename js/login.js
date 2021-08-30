@@ -15,6 +15,9 @@ function validarDatos(){
     }else{
         datosUsuario.email= email.value;
         localStorage.setItem("emailUs",JSON.stringify(datosUsuario));
-        location.href="principal.html";
+        location.href="principal.html";      
     }
+}
+function mostrarUsuario(){
+    
 }
