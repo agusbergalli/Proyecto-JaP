@@ -9,20 +9,38 @@ var currentCategoriesArray = [];
 var currentSortCriteria = undefined;
 var minCount = undefined;
 var maxCount = undefined;
+var auxArray= [];
 
-function sortCategories(criteria, array){
+function verificacion() { //Toma los datos del buscador y busca coincidencias en el nombre del array de autos
+    var textoEscrito = document.getElementById("buscador").value; 
+    var listafiltrada = currentCategoriesArray.filter(function(name) {
+        return name.name.toLowerCase().indexOf(textoEscrito.toLowerCase()) > -1; 
+    })
+    currentCategoriesArray=listafiltrada;
+    if (textoEscrito.trim()===""){
+        currentCategoriesArray= auxArray;
+    } //Los que coincide lo guarda en un array
+    showCategoriesList(); 
+}
+
+function sortCategories(criteria, array){ //Ordena en base a criterio requerido
     let result = [];
     if (criteria === ORDER_ASC_BY_PRICE)
     {
         result = array.sort(function(a, b) {
-            if ( a.cost < b.cost ){ return -1; }
-            if ( a.cost > b.cost ){ return 1; }
+            let aC = parseInt(a.cost);
+            let bC = parseInt(b.cost);
+
+            if ( aC<bC ){ return -1; }
+            if ( aC > bC ){ return 1; }
             return 0;
         });
     }else if (criteria === ORDER_DESC_BY_PRICE){
         result = array.sort(function(a, b) {
-            if ( a.cost > b.cost ){ return -1; }
-            if ( a.cost < b.cost ){ return 1; }
+            let aCo = parseInt(a.cost);
+            let bCo = parseInt(b.cost);
+            if ( aCo > bCo ){ return -1; }
+            if ( aCo < bCo){ return 1; }
             return 0;
         });
     }else if (criteria === ORDER_BY_PROD_RELEVANCIA){
@@ -77,7 +95,7 @@ function showCategoriesList(array){
     hideSpinner();
 }
 
-function reordenarProductos(sortCriteria, categoriesArray){
+function reordenarProductos(sortCriteria, categoriesArray){ //Almacena el arreglo y el criterio para aplicar el criterio
     currentSortCriteria = sortCriteria;
 
     if(categoriesArray != undefined){
@@ -85,11 +103,10 @@ function reordenarProductos(sortCriteria, categoriesArray){
     }
 
     currentCategoriesArray = sortCategories(currentSortCriteria, currentCategoriesArray);
-
-    //Muestro las categorías ordenadas
+    auxArray= currentCategoriesArray; // No se pierden los datos al mezclarlos en el buscador
     showCategoriesList();
 }
-
+//Con los document escucho los cambios de boton y los aplico
 document.getElementById("rangeFilterCount").addEventListener("click", function(){
     //Obtengo el mínimo y máximo de los intervalos para filtrar por cantidad
     //de productos por categoría.
@@ -118,7 +135,12 @@ document.addEventListener("DOMContentLoaded", function(e){
             reordenarProductos(ORDER_ASC_BY_PRICE, resultObj.data);
         }
     });
+    document.getElementById('buscador').addEventListener('keyup',()=>{
 
+        verificacion();
+
+
+    });
     document.getElementById("Pasc").addEventListener("click", function(){
         reordenarProductos(ORDER_ASC_BY_PRICE);
     });
@@ -141,3 +163,4 @@ document.addEventListener("DOMContentLoaded", function(e){
         showCategoriesList();
     });
 });
+document.getElementById("buscador").addEventListener("mouseout", verificacion); 
