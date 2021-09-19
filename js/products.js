@@ -68,7 +68,7 @@ function showCategoriesList(array){
             ((maxCount == undefined) || (maxCount != undefined && parseInt(category.cost) <= maxCount))){
 
             ListadeAutos += `
-            <div class="list-group-item list-group-item-action">
+            <a href="product-info.html" class="list-group-item list-group-item-action">
                 <div class="row"> 
                     <div class="col-3">
                         <img src="` + category.imgSrc + `" alt=" " class="img-thumbnail">
@@ -86,7 +86,7 @@ function showCategoriesList(array){
                         
                     </div>
                 </div>
-            </div>
+            </a>
             `
             document.getElementById("car-list").innerHTML = ListadeAutos;
         }

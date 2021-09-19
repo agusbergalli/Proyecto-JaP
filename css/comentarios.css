@@ -1,0 +1,52 @@
+@media only screen and (max-width: 766px) {
+    .comments-container {
+        width: 480px;
+    }
+ 
+    .comments-list .comment-box {
+        width: 390px;
+    }
+ 
+    .reply-list .comment-box {
+        width: 320px;
+    }
+ }
+ 
+ .rate {
+     float: left;
+     height: 46px;
+     padding: 0 10px;
+ }
+ .rate:not(:checked) > input {
+     position:absolute;
+     visibility: hidden;
+     bottom: -2400px;
+     right: 440px;
+     
+ }
+ .rate:not(:checked) > label {
+     float:right;
+     width:1em;
+     overflow:hidden;
+     white-space:nowrap;
+     cursor:pointer;
+     font-size:30px;
+     color:rgb(0, 0, 0);
+ }
+ .rate:not(:checked) > label:before {
+     content: '❤';
+ }
+ .rate > input:checked ~ label {
+     color: #ff0000;    
+ }
+ .rate:not(:checked) > label:hover,
+ .rate:not(:checked) > label:hover ~ label {
+     color: #b61919;  
+ }
+ .rate > input:checked + label:hover,
+ .rate > input:checked + label:hover ~ label,
+ .rate > input:checked ~ label:hover,
+ .rate > input:checked ~ label:hover ~ label,
+ .rate > label:hover ~ input:checked ~ label {
+     color: #fc4646;
+ }

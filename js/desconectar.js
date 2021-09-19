@@ -1,5 +1,5 @@
 function signOut() {
-    localStorage.clear();
+    localStorage.removeItem('emailUS');
     sessionStorage.clear();
     
     var auth2 = gapi.auth2.getAuthInstance();

@@ -1,0 +1,27 @@
+h2,h4{ 
+    text-align: center;
+    color:darkslategray;
+    margin-top: 10px ;
+    margin-bottom: 20px;
+}
+#desc{
+    margin-left: 30px;
+    margin-bottom: 20px;
+}
+#precio{
+    font-family: serif;
+    color: white;
+    background-color: darkslategray;
+}
+.caja{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+img{
+    margin-left: 30px;
+    height: 200px;
+    width: 200px;
+}
+#heart{
+    color: red;
+}
