@@ -3,11 +3,17 @@
 //elementos HTML presentes.
 var comentarios= [];
 var arrayinfoautos=[];
+var relacionados=[];
 document.addEventListener("DOMContentLoaded", function(e){
 
     getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function(resultObj){//pedir comentarios
         if (resultObj.status === "ok"){
             comentarios= resultObj.data;
+        }
+    });
+    getJSONData(PRODUCTS_URL).then(function(resultObj){//pedir comentarios
+        if (resultObj.status === "ok"){
+            relacionados= resultObj.data;
         }
     });
     getJSONData(PRODUCT_INFO_URL).then(function(resultObj){//Pido info auto
@@ -34,12 +40,35 @@ function cargardatos (){
                     <div id="desc" class="row">
                     <div  class="col-12 col-md-8">` + arrayinfoautos.description +`</div>
                     <br><div id="precio" class="col-6 col-md-4"> `+ arrayinfoautos.currency + arrayinfoautos.cost +  `<br><br> Cantidad Vendidos: ` + arrayinfoautos.soldCount +  `</div>
-                    </div><hr><h4> Imagenes</h4>`
-                  
-                    for (let i=0; i<arrayinfoautos.images.length; i++){
-                        contenido += `<img src="`+arrayinfoautos.images[i]+`" alt="" class="img-thumbnail">`
-
+                    </div><hr><h4> Imagenes</h4>
+                    <div></div>`
+                    contenido+= `<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>`;
+                    for (let e=1; e<arrayinfoautos.images.length; e++){
+                        contenido+= `<li data-target="#carouselExampleIndicators" data-slide-to="`+ e +`"></li>`;
                     }
+                    contenido += `</ol>
+                                <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="`+ arrayinfoautos.images[0]+`" class="d-block w-100" >
+                                </div> `
+                    for (let t=1; t<arrayinfoautos.images.length; t++){
+                        contenido+= `<div class="carousel-item">
+                                            <img src="`+ arrayinfoautos.images[t]+`" class="d-block w-100" >
+                                    </div>`;
+                    }
+                    contenido += `
+                                </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                    </a>
+                                </div>`
     //Info de los comentarios
     contenido += `<hr><h4> Comentarios </h4> ` 
     for (let j=0; j<comentarios.length;j++){
@@ -85,6 +114,33 @@ function cargardatos (){
                     <button onclick="verificarComentar();" type="button" class="btn btn-info">Comentar</button>  
                 </div>` 
     
+    contenido += `<hr><h4> Productos Relacionados </h4> `
+
+    for(let x=0; x<arrayinfoautos.relatedProducts.length; x++){
+      let posicion= arrayinfoautos.relatedProducts[x];
+      contenido += `
+            <a href="product-info.html" class="list-group-item list-group-item-action">
+                <div class="row"> 
+                    <div class="col-3">
+                        <img src="` + relacionados[posicion].imgSrc + `" alt=" " class="img-thumbnail">
+                    </div>
+                    <div class="col">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h4 class="mb-1">`+ relacionados[posicion].name  +`</h4>
+                            <p class="text-muted">` + relacionados[posicion].cost + ` USD</p>
+                    
+                        </div>
+                        <div class="d-flex w-100 justify-content-between">
+                            <p class="text-muted" > ` + relacionados[posicion].soldCount + ` unidades.</p>
+                        </div>
+                        <p> `  + relacionados[posicion].description + `  </p>
+                        
+                    </div>
+                </div>
+            </a>
+            `
+    }
+
     document.getElementById("infoAutos").innerHTML = contenido;
 }
 
