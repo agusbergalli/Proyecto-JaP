@@ -68,25 +68,32 @@ function showCategoriesList(array){
             ((maxCount == undefined) || (maxCount != undefined && parseInt(category.cost) <= maxCount))){
 
             ListadeAutos += `
-            <a href="product-info.html" class="list-group-item list-group-item-action">
-                <div class="row"> 
-                    <div class="col-3">
-                        <img src="` + category.imgSrc + `" alt=" " class="img-thumbnail">
+            <div class="fondo">
+                <a href="product-info.html">
+                    <div class="contResp"> 
+                        <div class="itemResp">
+                            <div class ="box contResp"> 
+                                <div class="imgCard">
+                                    <img src="` + category.imgSrc + `" alt=" " class="img-thumbnail">
+                                </div>
+                                <div class="">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h4 class="mb-6">`+ category.name  +`</h4>
+                                        <p class="text-muted">` + category.cost + ` USD</p>
+                                
+                                    </div>
+                                    <div class="d-flex w-200 justify-content-between">
+                                        <p class="text-muted" > ` + category.soldCount + ` unidades.</p>
+                                    </div>
+                                    <div>
+                                        <p class="mb-6"> `  + category.description + `  </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                   
                     </div>
-                    <div class="col">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1">`+ category.name  +`</h4>
-                            <p class="text-muted">` + category.cost + ` USD</p>
-                    
-                        </div>
-                        <div class="d-flex w-100 justify-content-between">
-                            <p class="text-muted" > ` + category.soldCount + ` unidades.</p>
-                        </div>
-                        <p> `  + category.description + `  </p>
-                        
-                    </div>
-                </div>
-            </a>
+                </a>
+            </div>
             `
             document.getElementById("car-list").innerHTML = ListadeAutos;
         }

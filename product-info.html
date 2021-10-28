@@ -15,25 +15,29 @@
   <link href="css/styles.css" rel="stylesheet">
   <link href="css/comentarios.css" rel="stylesheet">
   <link href="css/productinfo.css" rel="stylesheet">
+  <link href="css/BarraNav.css" rel="stylesheet">
 </head>
 
 <body>
-  <nav class="site-header sticky-top py-1 bg-dark">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-      <a class="py-2 d-none d-md-inline-block" href="principal.html">Inicio</a>
-      <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
-      <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
-      <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <div class="dropdown">
+  <nav class="site-header sticky-top py-1 ">
+    <ul>
+      <li><a class="text-white" href="principal.html">Inicio</a></li>
+      <li><a class="text-white" href="categories.html">Categorías</a></li>
+      <li><a class="text-white" href="products.html">Productos</a></li>
+      <li><a class="text-white" href="sell.html">Vender</a></li>
+      <li><div class="">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <p class="py-2 d-none d-md-inline-block" id="verUsuario" ><span>Hi,</span></p>
+          <p class="text-white" id="verUsuario" ><span>Hi,</span></p>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
           <a class="dropdown-item" href="cart.html">Mi carrito</a>
           <a class="dropdown-item" href="#"><button onclick="signOut();">Logout</button></a>
         </div>
-      </div>
+      </div></li>
+    </ul>
+    <div class="hide">
+      <i class="fa fa-bars" aria-hidden="true"></i> Menu
     </div>
   </nav>
   <div class="row">
@@ -61,6 +65,11 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/product-info.js"></script>
+  <script>
+    $(".hide").on('click', function() {
+      $("nav ul").toggle('slow');
+    })
+  </script>
 </body>
 
 </html>
