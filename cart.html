@@ -11,6 +11,8 @@
 
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
   <style>
     .bd-placeholder-img {
@@ -34,11 +36,10 @@
   <script src="js/desconectar.js"></script>
   <link href="css/BarraNav.css" rel="stylesheet">
 
-  <meta name="google-signin-scope" content="profile email" />
+  <meta name="google-signin-scope" content="profile email"/>
     <meta
       name="google-signin-client_id"
-      content="463742915434-a663dgaia81tknh0svrm2gbjj0fa28jv.apps.googleusercontent.com"
-    />
+      content="463742915434-a663dgaia81tknh0svrm2gbjj0fa28jv.apps.googleusercontent.com"/>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 
@@ -49,7 +50,7 @@
       <li><a class="text-white" href="categories.html">Categorías</a></li>
       <li><a class="text-white" href="products.html">Productos</a></li>
       <li><a class="text-white" href="sell.html">Vender</a></li>
-      <li><div class="">
+      <li><div>
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <p class="text-white" id="verUsuario" ><span>Hi,</span></p>
         </button>
@@ -72,6 +73,150 @@
       </div>
   </div>
   </div>
+
+  <!-- Formulario -->
+
+  <form class="row g-3 needs-validation" novalidate>
+    <div class="col-md-4">
+      <label for="validationCustom01" class="form-label">Nombre</label>
+      <input type="text" class="form-control" id="validationCustom01" required>
+      <div class="valid-feedback">
+        Correcto!
+      </div>
+      <div class="invalid-feedback">
+       Nombre incorrecto, verifique por favor.
+      </div>
+    </div>
+    <div class="col-md-4">
+      <label for="validationCustom02" class="form-label">Apellido</label>
+      <input type="text" class="form-control" id="validationCustom02"  required>
+      <div class="valid-feedback">
+        Correcto!
+      </div>
+      <div class="invalid-feedback">
+        Apellido incorrecto, verifique por favor.
+      </div>
+    </div>
+    <div class="col-md-4">
+      <label for="validationCustomUsername" class="form-label">Email</label>
+      <div class="input-group has-validation">
+        <input type="email" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+        <div class="invalid-feedback">
+          Email incorrecto, verifique por favor.
+        </div>
+        <div class="valid-feedback">
+          Correcto!
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="validationCustom03" class="form-label">Ciudad</label>
+      <input type="text" class="form-control" id="validationCustom03" required>
+      <div class="invalid-feedback">
+        Ciudad incorrecto, verifique por favor.
+      </div>
+      <div class="valid-feedback">
+        Correcto!
+      </div>
+    </div>
+    
+    <div class="col-md-3">
+      <label for="validationCustom05" class="form-label">Dirección</label>
+      <input type="text" class="form-control" id="validationCustom05" required>
+      <div class="invalid-feedback">
+        Dirección incorrecto, verifique por favor.
+      </div>
+      <div class="valid-feedback">
+        Correcto!
+      </div>
+    </div>
+
+   <!-- Elección de envíos -->
+   <br>
+   <br>
+   <br>
+    <div id="eleccionEnvios">
+      <div>
+        <label for="tipoEnvio">Tipo de envio:</label><br />
+        <input type="radio" id="envioA" name="send" value="premium" checked />
+        <label for="premium">Premium (2-5 días) Costo del 15%</label>
+      </div>
+
+      <div>
+        <input type="radio" id="envioB" name="send" value="express" />
+        <label for="express">Express (5-8 días) Costo del 7%</label>
+      </div>
+
+      <div>
+        <input type="radio" id="envioC" name="send" value="standard" />
+        <label for="standard">Standard (12 a 15 días) Costo del 5%</label>
+      </div>
+    </div>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+      Formas de pago
+  </button>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <br>
+            <h5 class="modal-title" id="staticBackdropLabel">Formas de pago</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            
+          </div>
+          <div class="modal-body">
+            <div>
+              <input onclick="mostrarDatosTcredito();" type="radio" id="credito" name="pago" value="credit"  />
+              <label for="credit">Tarjeta de crédito (Visa,OCA,Mastercard)</label>
+            </div>
+            <div id="Tcredito">
+              <div>
+                <label for="numT">
+                  Número de tarjeta
+                </label>
+                <input type="number" id="nroTarjeta" placeholder="Número de tarjeta" class="form-control"  >
+              </div>
+              <div>
+                <label for="CSV">
+                  Código de seguridad
+                </label>
+                <input type="number" id="csv" placeholder="Código de seguridad" class="form-control" >
+              </div>
+              <div>
+                <label for="vto">
+                  Fecha de vencimiento (MM/AA)
+                </label>
+                <input type="text" id="vto" placeholder="Fecha de vencimiento (MM/AA)" class="form-control" >
+              </div>
+            </div>
+            <div>
+              <input onclick="mostrarDatosTBank();"type="radio" id="banco" name="pago" value="bank" />
+              <label for="bank">Tarjeta bancaria</label>
+            </div>
+            <div id="tBank">
+              <div>
+                <label for="cta">
+                  Número de cuenta
+                </label>
+                <input type="number" id="nroCta" placeholder="Número de cuenta" class="form-control" >
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Continuar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button  onclick="verificarFinal();" class="btn btn-primary" type="submit">Aceptar</button>
+  </form>
+
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
